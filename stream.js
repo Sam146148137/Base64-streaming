@@ -6,7 +6,7 @@ const fs = require("fs");
 app.get('/stream',(req, res) => {
 
     // path to image
-    const image = fs.readFileSync('path to your image');
+    const image = fs.readFileSync('/home/sam/Desktop/stream/image1.jpg');
 
     // creating buffer from image
     const BufferImage = new Buffer.from(image).toString('base64');
@@ -21,11 +21,11 @@ app.get('/stream',(req, res) => {
     const data = base64Image.replace(/^data:image\/\w+;base64,/, "");
 
     // creating buffer from base64 string
-    const buffer = Buffer.from(BufferImage, 'base64');
+    const buffer = Buffer.from(data, 'base64');
 
     // streaming buffer
     streamifier.createReadStream(buffer).pipe(res);
-});
+})
 
 const port = 3000;
 app.listen(port, () => {
